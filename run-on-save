@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+
+file=$(realpath --relative-to="$1" "$2")
+
+printf "START [$(date '+%Y/%m/%d %H:%M:%S')]\n"
+trap 'printf "\nEND [$(date '\''+%Y/%m/%d %H:%M:%S'\'')]\n\n"' 0
+
+printf "\n+ npx npx tsc $file.ts\n\n"
+time npx npx tsc "$file.ts"
+
+printf "\n+ node $file.js\n\n"
+time node "$file.js"
